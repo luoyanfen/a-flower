@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>登录页面</title>
+    <link rel="stylesheet" href="./layui/css/layui.css">
+    <!--自定义的css应该在框架的css之后-->
+    <link rel="stylesheet" type="text/css" href="./css/login1.css" />
+</head>
+
+<body>
+    <div class="top">
+        <span>一枝花</span>
+        <img src="./img/a flower.png" alt="">
+        <a href="./index.html">
+            <div class="back1-index">返回首页</div>
+        </a>
+    </div>
+    <div class="bg-img">
+        <div class="text">
+            <img class="login-text" src="./img/login-text.png" alt="">
+        </div>
+        <div class="my">
+            <form class="layui-form  myform" action="">
+                <div class="title">使用面试考试系统 账号登录</div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">账号</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="sname" required lay-verify="required" placeholder="请输入账号"
+                            autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="layui-form-mid layui-word-aux H">*必填</div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">密码</label>
+                    <div class="layui-input-inline">
+                        <input type="password" name="spasswd" required lay-verify="required" placeholder="请输入密码"
+                            autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="layui-form-mid layui-word-aux H">*必填</div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">验证码</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="coder" required lay-verify="required" placeholder="请输入验证码"
+                            autocomplete="off" class="layui-input">
+                    </div>
+                    <img class="coder" src="http://admin.jianmian.com:8080/coder" alt="">
+                    <span class="more-text">看不清，换一张</span>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit lay-filter="login">登录</button>
+                    </div>
+                </div>
+                <a href="./admin-login.html">我是管理员</a>
+
+            </form>
+        </div>
+    </div>
+    <div class="botton">
+        <div class="botton-content">
+            <p>Copyright 2019-2020 &nbsp;&nbsp;&nbsp;"一枝花"小组面试题系统项目</p>
+            <div>
+                <span>京ICP证140571号 | 京公网安备 11010802017721</span>
+                <span>广播电视节目制作经营许可证（京）字第05791号</span>
+            </div>
+        </div>
+    </div>
+    <script src="./layui/layui.all.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="./js/login.js"></script>
+</body>
+
+</html>

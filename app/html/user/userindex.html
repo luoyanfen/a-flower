@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>考试库管理系统</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../layui/css/layui.css">
+  <!--自定义的css应该在框架的css之后-->
+  <link rel="stylesheet" type="text/css" href="../../css/userindex.css" />
+</head>
+
+<body>
+  <div class="navtop">
+    <nav class="navbar  navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="nav navbar-nav navbar-left">
+          <a class="navbar-brand" href="#">
+            <img alt="Brand" src="../../img/a flower.png">
+          </a>
+          <a class="navbar-brand" href="#">一枝花考试系统</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#myque" aria-controls="myque" role="tab"
+                data-toggle="tab">我的题库</a></li>
+            <li role="presentation"><a href="#myfq" aria-controls="myfq" role="tab" data-toggle="tab">我的错题</a></li>
+            <li role="presentation"><a href="#mydelq" aria-controls="mydelq" role="tab" data-toggle="tab">回收站</a></li>
+            <li role="presentation"><a href="#myre" aria-controls="myre" role="tab" data-toggle="tab">反馈</a></li>
+            <li role="presentation"><a href="#myinfo" aria-controls="myinfo" role="tab" data-toggle="tab">个人资料</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="http://localhost/client/home.html">返回首页</a></li>
+            <li><a class="exit" href="#">退了</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <div class='cont'>
+    <div class="container">
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="myque">
+          <div class="toptxt">我的题库</div>
+          <hr>
+          <div class="input-group">
+            <input type="text" class="form-control" id="sousuo" placeholder="按知识点ID查找">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button" id="search">查找</button>
+            </span>
+          </div>
+          <hr>
+          <div class="table">
+            <table id="quelist" lay-filter="test"></table>
+          </div>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="myfq">
+          <div class="toptxt">我的错题</div>
+          <hr>
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="按知识点ID查找">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button">查找</button>
+            </span>
+          </div>
+          <hr>
+          <div class="table">
+            <table id="fquelist" lay-filter="test"></table>
+          </div>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="mydelq">
+          <div class="toptxt">回收站</div>
+          <hr>
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="按知识点ID查找">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button">查找</button>
+            </span>
+          </div>
+          <hr>
+
+          <div class="table">
+            <table id="delquelist" lay-filter="test"></table>
+          </div>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="myre">
+          <div class="toptxt">反馈</div>
+          <hr>
+          <form action="">
+            <label for="editor" style="font-size: 16px; font-weight: 400;">填写反馈内容</label>
+            <div id="editor">
+              <p></p>
+            </div>
+            <textarea id="text" style="width:100%; height:200px;"></textarea>
+            <button id="btn" type="submit">提交</button>
+          </form>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="myinfo">
+          <div class="toptxt">个人资料</div>
+          <hr>
+          <div class="svg">
+            <img class="headpic" src="" alt="我的头像">
+            <div class="nickname"></div>
+          </div>
+          <form class="infoform">
+            <div class="info">
+              <div><span style="letter-spacing: 20px;">姓</span>名:<input type="text" class="sname"></div><br>
+              <div><span style="letter-spacing: 20px;">学</span>号:<input type="number" class='stuno'></div><br>
+              <div><span style="letter-spacing: 20px;">班</span>级:<input type="text" class='sgid'></div><br>
+              <div>手机号:<input type="number" class='stel' style="display: inline-block;"></div><br>
+              <div>Q<span style="letter-spacing: 10px;">Q</span>号:<input type="number" class='sqq'></div><br>
+              <div><span style="letter-spacing: 20px;">备</span>注:<input type="text" class='sinfo'></div><br>
+              <div><input class="editor" type="button" value="修改"></div>
+            </div>
+            
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <script src="../../layui/layui.all.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
+  <script src="https://unpkg.com/wangeditor@3.1.1/release/wangEditor.min.js"></script>
+  <script src="../../js/userindex.js"></script>
+  <script type="text/javascript">
+    let E = window.wangEditor
+    let editor = new E('#editor');
+    let text = document.querySelector('#text');
+    editor.customConfig.onchange = function (html) {
+      // 监控变化，同步更新到 textarea
+      text.value=html;
+    };
+    editor.customConfig.uploadImgServer = axios.defaults.baseURL + '/uploads';
+    editor.create();
+
+    // document.querySelector('#btn').onclick=function(){
+    //   let data=text.value;
+    //   axios.post('/userque/submit',{data})
+    //   .then(res => {
+    //     console.log(res)
+    //   })
+    //   .catch(err => {
+    //     console.error(err); 
+    //   })
+    // }
+    
+  </script>
+  <script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+  </script>
+
+
+</body>
+
+</html>

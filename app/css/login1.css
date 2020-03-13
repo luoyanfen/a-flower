@@ -1,0 +1,117 @@
+.top {
+  width: 100%;
+  height: 55px;
+  margin-top: 10px; }
+  
+  .top a>div {
+    width: 80px;
+    height: 30px;
+    display: inline-block;
+    background-color: #E3C1DC;
+    border-radius: 3px;
+    line-height: 30px;
+    text-align: center;
+  }
+  
+  .top .back1-index {
+    margin-left: 685px;
+  }
+  
+  .top .back1-login {
+    margin-left: 10px;
+  }
+  .top span {
+    font-weight: bolder;
+    font-size: 20px;
+    margin-left: 190px; }
+  .top img {
+    width: 55px; }
+
+.bg-img {
+  width: 100%;
+  height: 650px;
+  background-image: url("http://storage.xuetangx.com/public_assets/xuetangx/examsystem/login-bg.png");
+  background-repeat: no-repeat;
+  position: relative; }
+
+.text {
+  width: 240px;
+  margin-left: 42%; }
+  .text .login-text {
+    width: 240px;
+    position: relative;
+    top: 57px; }
+
+.my {
+  display: flex;
+  text-align: center;
+  justify-content: center; }
+
+.myform {
+  width: 430px;
+  height: 407px;
+  background-color: #fff;
+  text-align: center;
+  display: block;
+  border-radius: 10px;
+  box-shadow: 0 2px 20px 0 #b1b1b1;
+  position: relative;
+  top: 75px; }
+  .myform a {
+    text-decoration: underline;
+    font-size: 13px;
+    position: absolute;
+    right: 20px;
+    color: rgba(0, 0, 255, 0.603); }
+    .myform a:hover {
+      color: blue; }
+
+.title {
+  font-size: 16px;
+  margin-top: 40px;
+  margin-bottom: 30px; }
+
+.layui-input {
+  border-radius: 5px;
+  width: 195px; }
+
+.H {
+  color: red !important;
+  font-size: 12px; }
+
+.layui-btn {
+  background-color: #1d7fdb;
+  position: relative;
+  width: 180px;
+  right: 62px;
+  margin-top: 20px; }
+
+.coder {
+  padding-left: 28px;
+  margin-top: 3px; }
+
+.botton {
+  width: 100%;
+  height: 168px;
+  background-color: #333;
+  color: #999;
+  font-size: 16px; }
+  .botton .botton-content {
+    width: 50%;
+    margin: 0 auto;
+    padding-top: 60px; }
+    .botton .botton-content div {
+      width: 725px;
+      margin-top: 10px; }
+      .botton .botton-content div span {
+        margin-right: 10px; }
+
+.more-text {
+  text-decoration: underline;
+  color: blue;
+  font-size: 12px;
+  vertical-align: bottom; }
+  .more-text:hover {
+    cursor: pointer; }
+
+/*# sourceMappingURL=login1.css.map */

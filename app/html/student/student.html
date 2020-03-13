@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>一枝花面试题系统管理员</title>
+    <link rel="stylesheet" href="../../css/addstudent.css">
+    <link rel="stylesheet" href="../../layui/css/layui.css">
+   
+</head>
+
+<body class="layui-layout-body">
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header">
+            <!-- 顶部导航 -->
+        </div>
+
+        <div class="layui-side layui-bg-black">
+            <!-- 左侧daohang -->
+        </div>
+
+        <div class="layui-body">
+            <!-- 内容主体区域 -->
+            <div style="padding: 15px;">
+                <span class="layui-breadcrumb">
+                    <a href="">首页</a>
+                    <a href="">学生管理</a>
+                    <a href="">管理学生</a>
+                  </span>
+                <hr>
+                <table id="student" class="height" lay-filter="test"></table>
+                </div>
+        </div>
+
+        <div class="layui-footer">
+            <!-- 底部固定区域 -->
+            © yizhihua.com - 面试题管理系统
+        </div>
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="../../js/menu.js"></script>
+    <script src="../../layui/layui.js"></script>
+    <script src="../../layui/layui.all.js"></script>
+    <script src="../../js/ajax.js"></script>
+
+    <script type="text/html" id="studentavatar">
+        <img  src="{{d.avatar}}" id='showimg' >
+      </script>
+
+      <script type="text/html" id="barDemo">
+        <a class="layui-btn layui-btn-xs" href="./eiditstudent.html?sid={{d.sid}}"> >编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+        
+      </script>
+   
+</body>
+
+</html>

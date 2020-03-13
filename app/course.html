@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>layout 后台大布局 - Layui</title>
+	<link rel="stylesheet" href="./layui/css/layui.css">
+	<!--自定义的css应该在框架的css之后-->
+	<link rel="stylesheet" type="text/css" href="./css/common.css" />
+</head>
+
+<body class="layui-layout-body">
+	<div class="layui-layout layui-layout-admin">
+		<div class="layui-header">
+			<div class="layui-logo">面试题管理系统</div>
+			<!-- 头部区域（可配合layui已有的水平导航） -->
+			<ul class="layui-nav layui-layout-left">
+				<li class="layui-nav-item"><a href="">控制台</a></li>
+				<li class="layui-nav-item"><a href="">商品管理</a></li>
+				<li class="layui-nav-item"><a href="">用户</a></li>
+				<li class="layui-nav-item">
+					<a href="javascript:;">其它系统</a>
+					<dl class="layui-nav-child">
+						<dd><a href="">邮件管理</a></dd>
+						<dd><a href="">消息管理</a></dd>
+						<dd><a href="">授权管理</a></dd>
+					</dl>
+				</li>
+			</ul>
+			<ul class="layui-nav layui-layout-right">
+				<li class="layui-nav-item">
+					<a href="javascript:;">
+						<img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+						贤心
+					</a>
+					<dl class="layui-nav-child">
+						<dd><a href="">基本资料</a></dd>
+						<dd><a href="">安全设置</a></dd>
+					</dl>
+				</li>
+				<li class="layui-nav-item"><a href="">退了</a></li>
+			</ul>
+		</div>
+
+		<div class="layui-side layui-bg-black">
+			<div class="layui-side-scroll">
+				<!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+				<ul class="layui-nav layui-nav-tree" lay-filter="test">
+					<li class="layui-nav-item layui-nav-itemed">
+						<a class="" href="javascript:;">课程管理</a>
+						<dl class="layui-nav-child">
+							<dd><a href="./addcourse.html">添加课程</a></dd>
+							<dd><a href="./course.html">管理课程</a></dd>
+						</dl>
+					</li>
+					<li class="layui-nav-item">
+						<a href="javascript:;">学生管理</a>
+						<dl class="layui-nav-child">
+							<dd><a href="./addstudent.html">学生录入</a></dd>
+							<dd><a href="./student.html">管理学生</a></dd>
+						</dl>
+					</li>
+					<li class="layui-nav-item"><a href="">云市场</a></li>
+					<li class="layui-nav-item"><a href="">发布商品</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="layui-body">
+			<!-- 内容主体区域 -->
+			<div style="padding: 15px;">
+				<span class="layui-breadcrumb">
+					<a href="./index.html">首页</a>
+					<a href="./course.html">课程管理</a>
+					<a><cite>课程列表</cite></a>
+				</span>
+				<hr>
+				<!-- 表 -->
+				<table id="courselist" lay-filter="test"></table>
+			</div>
+		</div>
+		<div class="layui-footer">
+			© admin.jianmian.com - 一枝花版权所有
+		</div>
+	</div>
+	<script src="./js/menu.js"></script>
+	<script src="./layui/layui.all.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script src="./js/login.js"></script>
+
+	<!-- 图片封面显示 -->
+	<script type="text/html" id="coursecover">
+        <a href="{{d.cover}}" target="_blank"><img src="{{d.cover}}"></a>
+	</script>
+
+	<!-- 绑定工具条  进行更新 删除操作 -->
+	<script type="text/html" id="barDemo">
+		<a class="layui-btn layui-btn-xs" lay-event="edit" href='./editcourse.html?cid={{d.cid}}'>编辑</a>
+		<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+	  </script>
+</body>
+
+</html>

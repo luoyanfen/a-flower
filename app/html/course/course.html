@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>面试题系统管理员</title>
+    <link rel="stylesheet" href="../../layui/css/layui.css">
+    <link rel="stylesheet" href="../../css/common.css">
+</head>
+
+<body class="layui-layout-body">
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header">
+            <!-- 顶部导航 -->
+        </div>
+
+        <div class="layui-side layui-bg-black">
+            <!-- 左侧daohang -->
+        </div>
+
+        <div class="layui-body">
+            <!-- 内容主体区域 -->
+            <div style="padding: 15px;">
+                <span class="layui-breadcrumb">
+					<a href="">首页</a>
+					<a href="">课程管理</a>
+					<a><cite>课程列表</cite></a>
+				</span>
+				<hr>
+				<!-- 表 -->
+				<table id="courselist" lay-filter="test"></table>
+            </div>
+        </div>
+
+        <div class="layui-footer">
+            <!-- 底部固定区域 -->
+            © yizhihua.com - 面试题管理系统
+        </div>
+    </div>
+    <script src="../../js/menu.js"></script>
+    <script src="../../layui/layui.js"></script>
+    <script src="../../layui/layui.all.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="../../js/ajax.js"></script>
+
+    	<!-- 图片封面显示 -->
+	<script type="text/html" id="coursecover">
+        <a href="{{d.cover}}" target="_blank"><img src="{{d.cover}}" style="width: 80px;height: 80px;border-radius: 50%;display: inline-block;"></a>
+	</script>
+
+	<!-- 绑定工具条  进行更新 删除操作 -->
+	<script type="text/html" id="barDemo">
+		<a class="layui-btn layui-btn-xs" lay-event="edit" href='./eiditcourse.html?cid={{d.cid}}'>编辑</a>
+		<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+	  </script>
+</body>
+
+</html>

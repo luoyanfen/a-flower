@@ -1,0 +1,45 @@
+.answer-contaier{
+	width: 1000px;
+	height: 100vh;
+	background-color: #fff;
+	margin: 20px auto;
+}
+
+.answer-head{
+	height: 40px;
+	border-bottom: 3px solid #25BB9B;
+	display: flex;
+}
+
+.analyse{
+	width: 80px;
+	height: 40px;
+	text-align: center;
+	line-height: 40px;
+	background-color: #25BB9B;
+}
+
+.grade-info{
+	height: 30px;
+	padding-right:30px;
+	padding-top: 20px;
+	font-size: 20px;
+	color: #34495e;
+	font-weight: 600;
+	border-bottom: 1px solid #D4D4D4;
+
+}
+
+.grade{
+	float: right;
+	padding-bottom: 20px;
+}
+
+.analyse-contain{
+	padding:30px;
+}
+
+.question-num{
+	padding-bottom: 10px;
+}
+

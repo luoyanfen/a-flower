@@ -1,0 +1,29 @@
+.my{
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.myform{
+	width: 435px;
+    height: 150px;
+	
+}
+
+.layui-input{
+	border-color: blue;
+}
+
+.addform{
+	width: 60%;
+	height: 100vh;
+	margin: 0 auto;
+}
+
+#showimg{
+	width: 120px;
+	height: 120px;
+	border-radius: 50%;
+	display: none;
+}

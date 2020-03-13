@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>一枝花</title>
+	<link rel="stylesheet" href="../../layui/css/layui.css">
+	<link rel="stylesheet" href="http://at.alicdn.com/t/font_1597021_kmm7dygyka.css">
+	<link rel="stylesheet" href="../../css/userquestion.css">
+	<link rel="stylesheet" href="../../css/specialuserquestion.css">
+	<link rel="stylesheet" href="../../css/answer.css">
+</head>
+
+<body>
+	<div class="containers">
+		<div class="head-contaier">
+			<div class="head-left">
+				<a href="">
+					<img src="../../img/a flower.png" alt="">
+				</a>
+				<span>一枝花</span>
+			</div>
+			<div class="head-right">
+				<div class="right1">
+					<a href="#">
+						<i class="iconfont icon-solid-home"></i>
+						<span>我的试卷</span>
+					</a>
+					<i title="帮助中心" class="iconfont icon-bangzhuzhongxin"></i>
+					<i title="意见反馈" class="iconfont icon-message"></i>
+					<i title="消息" class="iconfont icon-xiaoxi"></i>
+				</div>
+				<div class="right2">
+					<img src="http://file02.16sucai.com/d/file/2015/0408/779334da99e40adb587d0ba715eca102.jpg" alt="">
+					<span>1234556</span>
+				</div>
+			</div>
+		</div>
+		<div class="answer-contaier">
+			<div class="answer-head">
+				<div class="analyse">答案解析</div>
+			</div>
+			<div class="grade-info">
+				<div class="grade">
+					<span>得分</span>
+					<span>80分</span>
+				</div>
+			</div>
+			<div class="analyse-box" >
+				
+			</div>
+		</div>
+	</div>
+</body>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+	axios.defaults.baseURL = 'http://admin.jianmian.com:8080';
+	axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+	axios.defaults.withCredentials = true;
+
+	window.onload = function () {
+		let search = window.location.search;
+        //去掉?
+		data = search.substr(1);
+
+		let arrdata = data.split("&");
+		//console.log(arrdata);
+
+		let newdata=[];
+		for(var i=0;i<arrdata.length;i++){
+			spldata = arrdata[i].split("=");
+			newdata[i] = spldata[1];
+			
+		}
+		//console.log(newdata);
+
+		//转decpdeURL
+		for(var n=0;n<newdata.length;n++){
+			newdata[n] = decodeURI(newdata[n]);
+		}
+		//console.log(newdata);
+
+		//jason格式转对象
+		for(let i=0;i<newdata.length;i++){
+			newdata[i] = JSON.parse(newdata[i]);
+		}
+		console.log(newdata);
+
+		//从数据库获取的题信息
+		mysqldata = newdata[0];
+		//用户提交的答案
+		userdata = newdata[1];
+
+		let str = ``;
+		let box = document.getElementsByClassName("analyse-box")[0];
+		for(let j = 0;j<userdata.length;j++){
+            str+=`<div class="analyse-contain">
+					<p class="question-num">题${j+1}</p>
+					<p>
+						<p>正确答案:${mysqldata[j].answer}</p>
+						<p>你的答案:${userdata[j]}</p>
+					</p>
+				</div>`;
+
+		}
+		box.innerHTML = str;
+	}
+</script>
+
+</html>

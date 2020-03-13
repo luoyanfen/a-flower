@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>面试题系统管理员</title>
+    <link rel="stylesheet" href="../../layui/css/layui.css">
+</head>
+
+<body class="layui-layout-body">
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header">
+            <!-- 顶部导航 -->
+        </div>
+
+        <div class="layui-side layui-bg-black">
+            <!-- 左侧daohang -->
+        </div>
+
+        <div class="layui-body">
+            <!-- 内容主体区域 -->
+            <div style="padding: 15px;">
+                <span class="layui-breadcrumb" style="margin-left:30px;">
+                    <a href="">管理员中心</a>
+                    <a href="">题库管理</a>
+                    <a href="">添加试题</a>
+                </span>
+                <hr>
+                <form class="layui-form addque" action="">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">题干</label>
+                        <div class="layui-input-block">
+                            <div id="editor">
+                                <p></p>
+                            </div>
+                            <textarea id="title" name="title" class="hidden"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">题型</label>
+                        <div class="layui-input-inline">
+                          <select name="type" lay-verify="required">
+                            <option value="1">主观题</option>
+                            <option value="2">单选题</option>
+                            <option value="3">多选题</option>
+                            <option value="4">填空题</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="layui-form-item">
+                        <label class="layui-form-label">课程</label>
+                        <div class="layui-input-inline">
+                          <select name="cid" lay-verify="required">
+                           
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="layui-form-item">
+                        <label class="layui-form-label">试题解析</label>
+                        <div class="layui-input-block">
+                            <div id="analyeditor">
+                                <p></p>
+                            </div>
+                            <textarea name="analysis" id="analysis" class="hidden"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" lay-submit lay-filter="addque">立即提交</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="layui-footer">
+            <!-- 底部固定区域 -->
+            © yizhihua.com - 面试题管理系统
+        </div>
+    </div>
+    <script src="../../js/menu.js"></script>
+    <script src="../../layui/layui.js"></script>
+    <script src="../../layui/layui.all.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="../../js/ajax.js"></script>
+
+    <script src="https://unpkg.com/wangeditor@3.1.1/release/wangEditor.min.js"></script>
+    <script type="text/javascript">
+        let E = window.wangEditor
+        let editor = new E('#editor');
+        let text1 = document.querySelector('#title');
+        editor.customConfig.onchange = function (html) {
+            // 监控变化，同步更新到 textarea
+            text1.value = html;
+        }
+        // 配置服务器端地址
+        editor.customConfig.uploadImgServer = axios.defaults.baseURL + '/uploads';
+
+        editor.create();
+
+
+        let analyeditor = new E('#analyeditor');
+        let text2 = document.querySelector('#analysis');
+        analyeditor.customConfig.onchange = function (html) {
+            // 监控变化，同步更新到 textarea
+            text2.value = html;
+        }
+        // 配置服务器端地址
+        analyeditor.customConfig.uploadImgServer = axios.defaults.baseURL + '/uploads';
+        analyeditor.create();
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>一枝花</title>
+	<link rel="stylesheet" href="../../layui/css/layui.css">
+	<link rel="stylesheet" href="http://at.alicdn.com/t/font_1597021_kmm7dygyka.css">
+	<link rel="stylesheet" href="../../css/userquestion.css">
+	<link rel="stylesheet" href="../../css/specialuserquestion.css">
+	<link rel="stylesheet" href="../../css/answer.css">
+</head>
+
+<body>
+	<div class="containers">
+		<div class="head-contaier">
+			<div class="head-left">
+				<a href="">
+					<img src="../../img/a flower.png" alt="">
+				</a>
+				<span>一枝花</span>
+			</div>
+			<div class="head-right">
+				<div class="right1">
+					<a href="#">
+						<i class="iconfont icon-solid-home"></i>
+						<span>我的试卷</span>
+					</a>
+					<i title="帮助中心" class="iconfont icon-bangzhuzhongxin"></i>
+					<i title="意见反馈" class="iconfont icon-message"></i>
+					<i title="消息" class="iconfont icon-xiaoxi"></i>
+				</div>
+				<div class="right2">
+					<img src="http://file02.16sucai.com/d/file/2015/0408/779334da99e40adb587d0ba715eca102.jpg" alt="">
+					<span>1234556</span>
+				</div>
+			</div>
+		</div>
+		<div class="buttom-contaier">
+			<div class="special-content">
+				<div>
+					<div class="course-title"></div>
+				</div>
+				<div class="course-idnex">
+					<div class="course-nums">1/10</div>
+					<div class="course-type">[单选题]</div>
+				</div>
+
+				<div class="question-contain">
+					<div class="title">这是题目</div>
+					<div class="options">
+
+					</div>
+					<div class="button-group">
+						<button type="button" class="layui-btn layui-btn-danger">提前交卷</button>
+						<button type="button" class="layui-btn next">下一题</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+	axios.defaults.baseURL = 'http://admin.jianmian.com:8080';
+	axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+	axios.defaults.withCredentials = true;
+
+	window.onload = function () {
+
+		//let headcontainer = document.getElementsByClassName("head-contaier")[0];
+
+		//获取地址栏传参值
+		let search = window.location.search;
+		console.log(search);
+
+		let str = search.substr(1);
+		//console.log(str)
+		let arr = str.split("&");
+		//console.log(arr)
+
+		let data = {};
+		for (var i = 0; i < arr.length; i++) {
+			let newarr = arr[i].split("=");
+			//console.log(newarr)
+			data[newarr[0]] = newarr[1];
+		}
+		//console.log(data)	
+
+
+		let cid = data.cid;
+
+
+		axios.get("/exequestion", {
+			params: {
+				cid
+			}
+		})
+			.then(res => {
+                let emestr = ``;
+
+				let dataInfo = res.data;
+				console.log(dataInfo);
+				//总题数
+				let arrLength = dataInfo.length;
+				//单个题的选项集合
+				let arroptions;
+
+				//题索引
+				let n = 0;
+				//用户做题答案
+				let useranswer = [];
+
+				//添加课程名
+				document.getElementsByClassName("course-title")[0].innerHTML = data.cname;
+
+				//父级容器
+				let emeoptions = document.getElementsByClassName("options")[0];
+				//题型
+				let coursetype = document.getElementsByClassName("course-type")[0];
+				//题目
+				let coursetitle = document.getElementsByClassName("title")[0];
+
+				//默认第一题
+				let coursenums = document.getElementsByClassName("course-nums")[0];
+				coursenums.innerHTML = `1/${arrLength}`;
+
+				//主观题
+				if (dataInfo[n].type == 1) {
+					//题型
+					coursetype.innerHTML = "[主观题]"
+					//题目
+					coursetitle.innerHTML = dataInfo[n].title;
+
+					emestr += `<textarea name="" required lay-verify="required" placeholder="请输入" class="layui-textarea text-input" value=""></textarea>`;
+				} else if (dataInfo[n].type == 2) {//单选题
+					coursetype.innerHTML = "[单选题]"
+					//题目
+					coursetitle.innerHTML = dataInfo[n].title;
+					//选项个数
+					let options = dataInfo[n].options;
+					arroptions = options.split(",");
+
+					for (let i = 0; i < arroptions.length; i++) {
+						emestr += `<div class="question-sel">
+							<label id="sels">
+								<input id="sel" type="radio" name="question-sel" value=${i}>
+								<span class="single-sel">${arroptions[i]}</span>
+							</label>
+						</div>`;
+					}
+
+				} else if (dataInfo[n].type == 3) {//多选题
+
+					coursetype.innerHTML = "[多选题]"
+					//题目
+					coursetitle.innerHTML = dataInfo[n].title;
+
+					//选项个数
+					let options = dataInfo[n].options;
+					arroptions = options.split(",");
+
+					for (let i = 0; i < arroptions.length; i++) {
+						emestr += `<div class="question-sel">
+							<label id="sels">
+								<input id="sel" type="checkbox" name="question-sel" value=${i}>
+								<span class="sing	le-sel">${arroptions[i]}</span>
+							</label>
+						</div>`;
+					}
+
+				}
+				//往页面加元素
+				emeoptions.innerHTML = emestr;
+
+				//保存用户当前做题或进入下一题
+				document.getElementsByClassName("question-contain")[0].onclick = function (ev) {
+					console.log(ev.target);
+
+					//单选题
+					if (ev.target.type == "radio") {
+						//通过value值获取用户的选择
+						useranswer[n] = arroptions[ev.target.value];
+						console.log(useranswer);
+					} else if (ev.target.type == "checkbox") {//多选题
+						useranswer[n] = ``;
+						let allA = document.querySelectorAll('input[type="checkbox"]:checked');
+						console.log(allA);
+						allA.forEach(function (ced) {
+							console.log(ced.value);
+							useranswer[n] += `${arroptions[ced.value]}`;
+						});
+						console.log(useranswer[n]);
+
+					} else if (ev.target.classList.contains("text-input")) {//文本
+						useranswer[n] = ``;
+						let textcontain = document.getElementsByClassName("text-input")[0];
+						textcontain.onmouseout = function () {
+
+							useranswer[n] = textcontain.value;
+
+							console.log("文本内容" + useranswer[n]);
+						}
+
+					}
+
+					//下一题
+					if (ev.target.classList.contains("next")) {
+						console.log("下一题");
+						n++;
+						//清空元素
+						emestr = '';
+						if (n < arrLength) {
+							//主观题
+							if (dataInfo[n].type == 1) {
+								//题型
+								coursetype.innerHTML = "[主观题]"
+								//题目
+								coursetitle.innerHTML = dataInfo[n].title;
+
+								emestr += `<textarea name="" required lay-verify="required" placeholder="请输入" class="layui-textarea text-input" value=""></textarea>`;
+							} else if (dataInfo[n].type == 2) {//单选题
+								coursetype.innerHTML = "[单选题]"
+								//题目
+								coursetitle.innerHTML = dataInfo[n].title;
+								//选项个数
+								let options = dataInfo[n].options;
+								arroptions = options.split(",");
+
+								for (let i = 0; i < arroptions.length; i++) {
+									emestr += `<div class="question-sel">
+									<label id="sels">
+										<input id="sel" type="radio" name="question-sel" value=${i}>
+										<span class="single-sel">${arroptions[i]}</span>
+									</label>
+								</div>`;
+								}
+
+							} else if (dataInfo[n].type == 3) {//多选题
+
+								coursetype.innerHTML = "[多选题]"
+								//题目
+								coursetitle.innerHTML = dataInfo[n].title;
+								//选项个数
+								let options = dataInfo[n].options;
+								arroptions = options.split(",");
+
+								for (let i = 0; i < arroptions.length; i++) {
+									emestr += `<div class="question-sel">
+									<label id="sels">
+										<input id="sel" type="checkbox" name="question-sel" value=${i}>
+										<span class="single-sel">${arroptions[i]}</span>
+									</label>
+								</div>`;
+								}
+
+
+							}
+							//当前题的位置
+							coursenums.innerHTML = `${n + 1}/${arrLength}`;
+							//添加元素
+							emeoptions.innerHTML = emestr;
+						} else {//encodeURL    decodeURL
+							window.location.href = `./questionanswer.html?dataInfo=${encodeURI(JSON.stringify(dataInfo))}&useranswer=${encodeURI(JSON.stringify(useranswer))}`;
+						}
+					}
+				}
+			})
+			.catch(err => {
+				console.error(err);
+			})
+
+	}
+</script>
+
+</html>
